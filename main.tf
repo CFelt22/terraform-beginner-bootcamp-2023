@@ -1,4 +1,10 @@
 terraform {
+  cloud {
+    organization = "CFelteau"
+    workspaces {
+      name = "terra-house-1"
+    }
+  }
   required_providers {
     random = {
       source = "hashicorp/random"
@@ -16,7 +22,9 @@ provider "random" {
 }
 
 provider "aws" {
-  # Configuration options
+  region     = ""
+  access_key = ""
+  secret_key = ""
 }
 
 resource "random_string" "bucket_name" {

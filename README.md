@@ -264,3 +264,61 @@ resource "random_string" "bucket_name" {
   upper            = false
 }
 ```
+
+### Issues with Terraform Cloud Login and Gitpod Workspace
+When attempting to run terraform login it will launch bash a wiswig view to generate a token. However it does not work expected in Gitpod VsCode in the browser.
+
+The workaround is manually generate a token in Terraform Cloud
+
+https://app.terraform.io/app/settings/tokens?source=terraform-login
+Then create open the file manually here:
+
+```
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+Provide the following code (replace your token in the file):
+
+```
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR-TERRAFORM-CLOUD-TOKEN"
+    }
+  }
+}
+```
+
+#### Issues with Terraform Plan
+
+When I uesd the command `terraform plan`, I had this error:
+
+```
+Initializing plugins and modules...
+╷
+│ Error: No valid credential sources found
+│ 
+│   with provider["registry.terraform.io/hashicorp/aws"],
+│   on main.tf line 24, in provider "aws":
+│   24: provider "aws" {
+│ 
+│ Please see https://registry.terraform.io/providers/hashicorp/aws
+│ for more information about providing credentials.
+│ 
+│ Error: failed to refresh cached credentials, no EC2 IMDS role found,
+│ operation error ec2imds: GetMetadata, request canceled, context deadline
+│ exceeded
+│ 
+╵
+Operation failed: failed running terraform plan (exit 1)
+```
+
+The way that I found to solve this error, was to add the aws credentials in the code like this. I do not like this solution as it increase the risk that I commit my credentials to Github.
+
+ ```
+ provider "aws" {
+  region     = 
+  access_key = 
+  secret_key = 
+}
+ ```
