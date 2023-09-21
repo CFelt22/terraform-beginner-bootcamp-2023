@@ -213,6 +213,14 @@ This will run a plan and pass the changset to be executed by terraform. Apply sh
 
 If we want to automatically approve an apply we can provide the auto approve flag eg. `terraform apply --auto-approve`.
 
+#### Terraform Destroy
+
+`teraform destroy`
+
+This will destroy resources.
+
+You can alss use the auto approve flag to skip the approve prompt eg. `terraform apply --auto-approve`
+
 #### Terraform Lock Files
 
 `.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
@@ -234,3 +242,25 @@ If you lose this file, you lose knowning the state of your infrastructure.
 #### Terraform Directory
 
 `.terraform` directory contains binaries of terraform providers.
+
+### Terraform S3 Bucket Name
+
+We used the Terraform random module to generate the name of the bucket. The initial configuration had those values :
+```
+resource "random_string" "random" {
+  length           = 16
+  special          = true
+  override_special = "/@£$"
+}
+```
+After reading the [AWS S3 naming rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html), we had to change those values. We can only have lower cases, numbers, dot `.` and hyphens `-`.
+
+We checked the Terraform Random module string [optional parameters](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) and removed the special characters and the uppercase characters. We also increased the length of the name. This is the code now :
+```
+resource "random_string" "bucket_name" {
+  length           = 32
+  special          = false
+  lower            = true
+  upper            = false
+}
+```
