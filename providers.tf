@@ -1,10 +1,10 @@
 terraform {
-  cloud {
-    organization = "CFelteau"
-    workspaces {
-      name = "terra-house-1"
-    }
-  }
+  #cloud {
+  #  organization = "CFelteau"
+  #  workspaces {
+  #    name = "terra-house-1"
+  #  }
+  #}
   required_providers {
     random = {
       source = "hashicorp/random"
@@ -22,7 +22,5 @@ provider "random" {
 }
 
 provider "aws" {
-  region     = ""
-  access_key = ""
-  secret_key = ""
+  # Configuration options
 }
