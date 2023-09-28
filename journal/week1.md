@@ -10,6 +10,7 @@
     * [terraform.tfvars](#terraformtfvars)
     * [auto.tfvars](#autotfvars)
     * [order of terraform variables](#order-of-terraform-variables)
+- [References](#references)
 
 
 ## Root Module Structure
@@ -59,6 +60,20 @@ The Terraform variables methods are used in this order[^1] :
 3. `terraform.tfvars.json`
 4. `terraform.tfvars`
 5. Environment variables
+
+## Dealing with Configuration Drift
+
+### What happens if we lose our state file?
+If you lose your statefile, you most likely have to tear down all your cloud infrastructure manually. You can use terraform port but it won't for all cloud resources. You need to check the terraform provides documentation for which resources support import.
+
+### Fix Missing Resources with Terraform Import
+
+`terraform import aws_s3_bucket.bucket bucket-name`
+
+[Terraform Import AWS S3 Bucket Import](https://developer.hashicorp.com/terraform/cli/import)
+
+### Fix Manual Configuration
+If someone goes and delete or modifies cloud resource manually through ClickOps. If we run Terraform plan with attempt to put our infrastructure back into the expected state fixing Configuration Drift.
 
 ## References
 [^1]: https://spacelift.io/blog/terraform-tfvars
