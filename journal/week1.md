@@ -44,10 +44,21 @@ https://developer.hashicorp.com/terraform/language/values/variables
 We can use the `-var` flag to set an input variable or override a variable in the tfvars file eg. `terraform -var user_id="my-user-id"`
 
 ### var-file flag
+We can use the `-var-file`to specify a variable file. It is more convenient to set a lot of variable eg. `terraform -var-file="my_vars.tfvars"`
 
 ### terraform.tfvars
 This is the default file to load in Terraform variables in bulk.
 
 ### auto.tfvars
+If we want to use custom name files for the variables instead of `terraform.tfvars`, we can add *.auto* and the file is automatically loaded as a variable file. eg. `my_custom_file.auto.tfvars` This is very usefull when we are dealing with child modules.
 
 ### order of terraform variables
+The Terraform variables methods are used in this order[^1] :
+1. Any `-var` and `-var-files`options on the command line, in the order they are provided.
+2. Any `*.auto.tfvars`or `*.auto.tfvars.json`files, processed in lexical order of their filenames.
+3. `terraform.tfvars.json`
+4. `terraform.tfvars`
+5. Environment variables
+
+## References
+[^1]: https://spacelift.io/blog/terraform-tfvars
