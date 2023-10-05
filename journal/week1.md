@@ -75,5 +75,42 @@ If you lose your statefile, you most likely have to tear down all your cloud inf
 ### Fix Manual Configuration
 If someone goes and delete or modifies cloud resource manually through ClickOps. If we run Terraform plan with attempt to put our infrastructure back into the expected state fixing Configuration Drift.
 
+## Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules
+
+It is recommended to place modules in a `module`directory when locally developping modules but you can name it whatever you like.
+
+### Passing Input Variables
+
+We can pass input variables to out module.
+The module has to declare the terraform variables in its own variables.tf
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import the module from various places eg:
+- locally
+- Github
+- Terraform Registry
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+}
+```
+
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules)
+
 ## References
 [^1]: https://spacelift.io/blog/terraform-tfvars
