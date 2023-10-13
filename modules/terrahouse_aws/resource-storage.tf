@@ -6,6 +6,7 @@ resource "aws_s3_bucket" "website_bucket" {
 
   tags = {
     UserUuid = var.user_uuid
+    Hello = "world!"
   }
 }
 
@@ -58,9 +59,9 @@ resource "aws_s3_object" "error_html" {
   source = var.error_html_filepath
 
   etag = filemd5(var.error_html_filepath)
-  lifecycle {
-    ignore_changes = [etag]
-  }
+  #lifecycle {
+  #  ignore_changes = [etag]
+  #}
 }
 
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
@@ -77,9 +78,9 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
         "Action" = "s3:GetObject",
         "Resource" = "arn:aws:s3:::${aws_s3_bucket.website_bucket.id}/*",
         "Condition" = {
-            "StringEquals" = {
-                "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
-            }
+            #"StringEquals" = {
+            #    "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
+            #}
         }
     }
   })
@@ -88,5 +89,3 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
 resource "terraform_data" "content_version" {
   input = var.content_version
 }
-
-#

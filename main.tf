@@ -5,6 +5,12 @@ terraform {
   #    name = "terra-house-1"
   #  }
   #}
+  cloud {
+    organization = "CFelteau"
+    workspaces {
+      name = "terraform-cloud"
+    }
+  }
 }
 
 module "terrahouse_aws" {
