@@ -40,6 +40,11 @@ variable "error_html_filepath" {
   }
 }
 
+variable "assets_path" {
+  description = "The file path for the assets"
+  type        = string
+}
+
 variable "content_version" {
   description = "The content version. Should be a positive integer starting at 1."
   type        = number
