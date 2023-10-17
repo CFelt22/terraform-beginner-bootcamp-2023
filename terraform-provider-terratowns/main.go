@@ -12,7 +12,7 @@ import (
 // Defines the `main` function, the entry point of the application. When you run the program, it starts executing from this function.
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
-		
+		ProviderFunc: Provider,
 	})
 	// Format.PrintLine
 	// Prints to standard output.
