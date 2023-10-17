@@ -4,7 +4,7 @@ package main
 // fmt is short for format. Imports the fmt package which contains functions for formatted I/O.
 import (
 	//"log"
-	"fmt"
+	//"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
@@ -16,7 +16,7 @@ func main() {
 	})
 	// Format.PrintLine
 	// Prints to standard output.
-	fmt.Println("Hello, world!")
+	//fmt.Println("Hello, world!")
 }
 
 // in golang, a titlecase function will get exported.
