@@ -19,6 +19,7 @@ provider "terratowns" {
   token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
 }
 
+/*
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
   user_uuid = var.user_uuid
@@ -28,3 +29,4 @@ module "terrahouse_aws" {
   assets_path = var.assets_path
   content_version = var.content_version
 }
+*/
