@@ -14,22 +14,21 @@ terraform {
 }
 
 provider "terratowns" {
-  endpoint = "https://terratowns.cloud/api"
-  user_uuid = var.user_uuid
-  token = var.terratowns_token
+  endpoint = var.terratowns_endpoint
+  user_uuid = var.teacherseat_user_uuid
+  token = var.terratowns_access_token
 }
 
-/*
+
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
-  user_uuid = var.user_uuid
-  bucket_name = var.bucket_name
+  user_uuid = var.teacherseat_user_uuid
   index_html_filepath = var.index_html_filepath
   error_html_filepath = var.error_html_filepath
   assets_path = var.assets_path
   content_version = var.content_version
 }
-*/
+
 
 resource "terratowns_home" "home" {
   name = "How to play Arcanum in 2023!"
@@ -38,8 +37,8 @@ resource "terratowns_home" "home" {
   Modders have removed all the originals making this game really to play (despite that old looking graphics). 
   This is my guide that will show you how to play Arcanum without spoiling the plot."
   DESCRIPTION
-  #domain_name = module.terrahouse_aws.cloudfront_url
-  domain_name = "3fjg4fj.cloudfront.net"
-  town = "gamers-grotto"
+  domain_name = module.terrahouse_aws.cloudfront_url
+  #domain_name = "j7jd73h.cloudfront.net"
+  town = "missingo"
   content_version = 1
 }
