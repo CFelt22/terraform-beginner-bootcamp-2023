@@ -226,9 +226,10 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 		d.Set("domain_name", responseData["domain_name"].(string))
 		d.Set("content_version", responseData["content_version"].(float64))
 
-	} else if resp.StatusCode != http.StatusOK {
+	} else if resp.StatusCode == http.StatusNotFound {
 		d.SetId("")
-		return diag.FromErr(fmt.Errorf("failed to read home resource, status_code: %d, status %s, body %s", resp.StatusCode, resp.Status, responseData))
+	} else if resp.StatusCode != http.StatusOK {
+		return diag.FromErr(fmt.Errorf("failed to read home resource, status_code: %d, status: %s, body %s", resp.StatusCode, resp.Status, responseData))
 	}
 
 	log.Print("resourceHouseRead:end")
