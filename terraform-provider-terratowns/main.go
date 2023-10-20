@@ -223,7 +223,7 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 		d.Set("name", responseData["name"].(string))
 		d.Set("description", responseData["description"].(string))
 		d.Set("domain_name", responseData["domain_name"].(string))
-		d.Set("content_version", responseData["content_version"].(int))
+		d.Set("content_version", responseData["content_version"].(float64))
 
 	} else if resp.StatusCode != http.StatusOK {
 		d.SetId("")
