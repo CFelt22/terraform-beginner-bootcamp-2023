@@ -18,6 +18,10 @@ variable "assets_path" {
   type = string
 }
 
+variable "terratowns_token" {
+  type = string
+}
+
 variable "content_version" {
   type        = number
 }
