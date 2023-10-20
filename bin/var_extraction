@@ -1,0 +1,7 @@
+#! /usr/bin/bash
+
+# Extract environment variable
+TT_TOKEN=$(echo $TERRATOWNS)
+
+# Update Terraform variable file
+sed -i "s/TERRATOWNS_TOKEN/$TT_TOKEN/" $PROJECT_ROOT/terraform.tfvars
