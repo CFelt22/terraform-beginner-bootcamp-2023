@@ -3,7 +3,6 @@ package main
 
 // fmt is short for format. Imports the fmt package which contains functions for formatted I/O.
 import (
-	//"log"
 	"bytes"
 	"context"
 	"encoding/json"
@@ -127,6 +126,7 @@ func Resource() *schema.Resource {
 }
 
 func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+
 	log.Print("resourceHouseCreate:start")
 	var diags diag.Diagnostics
 
@@ -186,6 +186,7 @@ func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interfac
 }
 
 func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+
 	log.Print("resourceHouseRead:start")
 	var diags diag.Diagnostics
 
@@ -231,10 +232,12 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 	}
 
 	log.Print("resourceHouseRead:end")
+
 	return diags
 }
 
 func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+
 	log.Print("resourceHouseUpdate:start")
 	var diags diag.Diagnostics
 
@@ -294,6 +297,7 @@ func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interfac
 }
 
 func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+
 	log.Print("resourceHouseDelete:start")
 	var diags diag.Diagnostics
 
@@ -329,5 +333,6 @@ func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interfac
 	d.SetId("")
 
 	log.Print("resourceHouseDelete:end")
+
 	return diags
 }
